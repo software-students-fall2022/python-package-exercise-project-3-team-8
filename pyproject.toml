@@ -3,11 +3,12 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "examplepackagefb1258"
-description = "An example of a package developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
-version = "0.0.7"
+name = "ASCII-Art"
+description = "A package that converts image to ASCII art, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
+version = "0.0.1"
 authors = [
-  { name="Foo Barstein", email="foo.barstein@onepotcooking.com" },
+  // add your name and email here
+  { name="Jiawei Zhang", email="jiawei.zhang@nyu.edu" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
