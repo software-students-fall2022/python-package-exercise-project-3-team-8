@@ -1,13 +1,69 @@
-# Python code to convert an image to ASCII image.
-import sys, random, argparse
+#import library
+import sys
 import numpy as np
 import math
  
-from PIL import Image
- 
-# gray scale level values from:
-# http://paulbourke.net/dataformats/asciiart/
- 
+from PIL import Image, ImageDraw
+
+def covertImageToAsciiImage(inputImage, outFile='output.png'):
+
+    #"Standard" list of ASCII sorted by grayscale (dark to light)
+    character="$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`'."
+
+    #convert string to list
+    character_list=list(character)
+
+    #get number of characters (68)
+    #print(len(character_list))
+
+    #open image
+    im = Image.open(inputImage)
+
+    #get width and height of the image
+    width, height=im.size
+
+    #get pixel matrix
+    pixel = im.load()
+
+    #open output text file - already function for this below
+    #output=open("output.txt","w")
+    
+    #create output image
+    #use color to adjust how dark the output image to be (0->dark, 255->light)
+    outputImage = Image.new('RGB', (10 * width, 18 * height), color = (40, 40, 40))
+
+    #draw output image
+    out = ImageDraw.Draw(outputImage)
+
+    #loop through rows of pixel matrix
+    for i in range(height):
+
+        #loop through columns of pixel matrix
+        for j in range(width):
+
+            #get R G B value of each pixel
+            r,g,b=pixel[j,i]
+
+            #take the average of R G B value for each pixel
+            average=(r+g+b)/3
+
+            #get the index of chracter for each pixel
+            #the range for R G B is 0-255
+            #index range is 0-67
+            index=int(average/3.8)
+
+            #write the character to output file
+            #output.write(character_list[index])
+
+            #fill the character with color (same rgb as the original image)
+            out.text((j*10, i*18), character_list[index], fill = (r, g, b))
+
+        #write to the next line in output file
+        #output.write("\n")
+
+    #get .png output image   
+    outputImage.save(outFile)   
+
 # 70 levels of gray
 gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
  
@@ -28,7 +84,7 @@ def getAverageL(image):
     # get average
     return np.average(im.reshape(w*h))
  
-def covertImageToAscii(fileName, cols, scale, moreLevels):
+def covertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True):
     """
     Given Image and dims (rows, cols) returns an m*n list of Images
     """
@@ -100,55 +156,3 @@ def covertImageToAscii(fileName, cols, scale, moreLevels):
      
     # return txt image
     return aimg
- 
-# main() function
-def main():
-    # create parser
-    descStr = "This program converts an image into ASCII art."
-    parser = argparse.ArgumentParser(description=descStr)
-    # add expected arguments
-    parser.add_argument('--file', dest='imgFile', required=True)
-    parser.add_argument('--scale', dest='scale', required=False)
-    parser.add_argument('--out', dest='outFile', required=False)
-    parser.add_argument('--cols', dest='cols', required=False)
-    parser.add_argument('--morelevels',dest='moreLevels',action='store_true')
- 
-    # parse args
-    args = parser.parse_args()
-   
-    imgFile = args.imgFile
- 
-    # set output file
-    outFile = 'out.txt'
-    if args.outFile:
-        outFile = args.outFile
- 
-    # set scale default as 0.43 which suits
-    # a Courier font
-    scale = 0.43
-    if args.scale:
-        scale = float(args.scale)
- 
-    # set cols
-    cols = 80
-    if args.cols:
-        cols = int(args.cols)
- 
-    print('generating ASCII art...')
-    # convert image to ascii txt
-    aimg = covertImageToAscii(imgFile, cols, scale, args.moreLevels)
- 
-    # open file
-    f = open(outFile, 'w')
- 
-    # write to file
-    for row in aimg:
-        f.write(row + '\n')
- 
-    # cleanup
-    f.close()
-    print("ASCII art written to %s" % outFile)
- 
-# call main
-if __name__ == '__main__':
-    main()
