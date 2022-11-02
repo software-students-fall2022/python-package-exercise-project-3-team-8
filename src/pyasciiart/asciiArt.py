@@ -1,14 +1,19 @@
 #import library
-import sys
 import numpy as np
-import math
  
 from PIL import Image, ImageDraw
 
-def covertImageToAsciiImage(inputImage, outFile='output.png'):
+# 70 levels of gray
+gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+ 
+# 10 levels of gray
+gscale2 = '@%#*+=-:. '
+
+def convertImageToAsciiImage(inputImage, outFile='output.png'):
 
     #"Standard" list of ASCII sorted by grayscale (dark to light)
-    character="$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`'."
+    global gscale1
+    character=gscale1
 
     #convert string to list
     character_list=list(character)
@@ -63,15 +68,8 @@ def covertImageToAsciiImage(inputImage, outFile='output.png'):
 
     #get .png output image   
     outputImage.save(outFile)   
-
-# 70 levels of gray
-gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
- 
-# 10 levels of gray
-gscale2 = '@%#*+=-:. '
  
 def getAverageL(image):
- 
     """
     Given PIL Image, return average value of grayscale value
     """
@@ -84,7 +82,7 @@ def getAverageL(image):
     # get average
     return np.average(im.reshape(w*h))
  
-def covertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True):
+def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True):
     """
     Given Image and dims (rows, cols) returns an m*n list of Images
     """
@@ -156,3 +154,22 @@ def covertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True):
      
     # return txt image
     return aimg
+
+def adjustASCIIBrightness(art, value, moreLevels=True):
+    """
+    Given ASCII Art text and brightness value [-1, 1] returns original ASCII Art text brightened/darkened
+    """
+    global gscale1, gscale2
+    gscale = gscale1 if moreLevels else gscale2
+
+    # adjust +/- brightness
+    adjustedVal = round(value * len(gscale)/2)
+
+    output = list(art)
+
+    for i in range(len(art)):
+        if art[i] in gscale:
+            # clamp new value to gscale
+            newVal = min(len(gscale) - 1, max(0, gscale.index(art[i]) + adjustedVal))
+            output[i] = gscale[newVal]
+    return ''.join(output)
