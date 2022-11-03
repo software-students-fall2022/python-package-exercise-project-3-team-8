@@ -1,5 +1,5 @@
 # Python code to convert an image to ASCII image.
-import sys, argparse
+import argparse
 import asciiArt as art
  
 # main() function
@@ -37,7 +37,7 @@ def main():
  
     print('Generating ASCII art from image...')
     # convert image to ascii txt
-    aimg = art.covertImageToAscii(imgFile, cols, scale, args.moreLevels)
+    aimg = art.convertImageToAscii(imgFile, cols, scale, args.moreLevels)
  
     # open file
     f = open(outFile, 'w')
@@ -50,9 +50,27 @@ def main():
     f.close()
     print("ASCII art written to %s" % outFile)
 
+    # test ASCII color image
     print('Generating ASCII art color image from image...')
-    art.covertImageToAsciiImage('cat1.jpg', 'output.png')
+    art.convertImageToAsciiImage('cat1.jpg', 'output.png')
     print('ASCII image written to output.png')
+
+    # test adjusting brightness
+    print('Adjusting brightness of ASCII image')
+
+    f = open(outFile, 'r')
+    baseImg = f.read()
+    f.close()
+    brighten = art.adjustASCIIBrightness(baseImg, .5)
+    darken = art.adjustASCIIBrightness(baseImg, -.5)
+    
+    bOut = open('brightened.txt', 'w')
+    dOut = open('darkened.txt', 'w')
+
+    bOut.write(brighten)
+    dOut.write(darken)
+
+    print('ASCII image output written to brightened.txt and darkened.txt')
  
 # call main
 if __name__ == '__main__':
