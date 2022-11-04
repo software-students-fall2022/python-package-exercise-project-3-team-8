@@ -173,3 +173,45 @@ def adjustASCIIBrightness(art, value, moreLevels=True):
             newVal = min(len(gscale) - 1, max(0, gscale.index(art[i]) + adjustedVal))
             output[i] = gscale[newVal]
     return ''.join(output)
+
+def adjustASCIIContrast(art, value, moreLevels=True):
+    """
+    Given ASCII Art text and contrast value [-1, 1] returns original ASCII Art text with softer or sharper contrast
+    """
+    global gscale1, gscale2
+
+    gscale = gscale1 if moreLevels else gscale2
+
+    # change in index
+    adjustedVal = round(abs(value) * len(gscale)/7)
+
+    output = list(art)
+
+    for i in range(len(art)):
+
+        if art[i] in gscale:
+            #softer
+            if (value<0):
+                #make index approach middle of gscale list
+                if (gscale.index(art[i])<=len(gscale)/2):
+
+                    newVal=min(round(len(gscale)/2)-1, gscale.index(art[i]) + adjustedVal)
+               
+                else:
+                    newVal = max(round(len(gscale)/2), gscale.index(art[i]) - adjustedVal)
+
+                output[i] = gscale[newVal]
+            #sharper
+            else:
+                #make index approach the end of gscale list
+                if (gscale.index(art[i])<=len(gscale)/2):
+
+                    newVal=max(0, gscale.index(art[i]) - adjustedVal)
+
+                else:
+
+                    newVal = min(len(gscale)-1, gscale.index(art[i]) + adjustedVal)
+
+                output[i] = gscale[newVal]
+
+    return ''.join(output)
