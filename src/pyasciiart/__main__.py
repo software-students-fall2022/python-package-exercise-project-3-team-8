@@ -71,7 +71,24 @@ def main():
     dOut.write(darken)
 
     print('ASCII image output written to brightened.txt and darkened.txt')
- 
+    
+    f = open("pyasciiart/out.txt", 'r')
+    baseImg = f.read()
+    f.close()
+
+    sharper=art.adjustASCIIContrast(baseImg,0.5)
+    softer=art.adjustASCIIContrast(baseImg,-0.5)
+
+    sharpOut = open('SharperContrast.txt', 'w')
+    sharpOut.write(sharper)
+    sharpOut.close()
+
+    softOut = open('SofterContrast.txt', 'w')
+    softOut.write(softer)
+    softOut.close()
+
+    print('ASCII image output written to SharperContrast.txt and SofterContrast.txt')
+
 # call main
 if __name__ == '__main__':
     main()
