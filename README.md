@@ -17,7 +17,7 @@ python-package-example/
     |____pyasciiart
       |______init__.py
       |______main__.py
-      |____asciiArt.py
+      |asciiarttools.py
 ```
 
 3. Make `__init__.py` an empty file.
