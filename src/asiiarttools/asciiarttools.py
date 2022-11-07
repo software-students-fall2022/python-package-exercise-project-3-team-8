@@ -216,3 +216,5 @@ def adjustASCIIContrast(art, value, moreLevels=True):
                 output[i] = gscale[newVal]
 
     return ''.join(output)
+
+    

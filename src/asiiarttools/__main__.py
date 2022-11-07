@@ -3,7 +3,20 @@ import asciiarttools as art
  
 # main() function
 def main():
-    imgFile = "cat2.jpg"
+    # create parser
+    descStr = "This program converts an image into ASCII art."
+    parser = argparse.ArgumentParser(description=descStr)
+    # add expected arguments
+    parser.add_argument('--file', dest='imgFile', required=True)
+    parser.add_argument('--scale', dest='scale', required=False)
+    parser.add_argument('--out', dest='outFile', required=False)
+    parser.add_argument('--cols', dest='cols', required=False)
+    parser.add_argument('--morelevels',dest='moreLevels',action='store_true')
+ 
+    # parse args
+    args = parser.parse_args()
+
+    imgFile = args.imgFile
  
     # set output file
     outFile = 'out.txt'

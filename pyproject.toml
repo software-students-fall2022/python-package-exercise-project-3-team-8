@@ -3,10 +3,11 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "asciiarttools"
+name = "asiiarttools"
 description = "A package that converts image to ASCII art, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
 version = "0.0.1"
 authors = [
+  # add your name and email here
   { name="Jiawei Zhang", email="jiawei.zhang@nyu.edu" },
   { name="Michael Ma", email="michael.ma@nyu.edu"},
 ]
@@ -21,6 +22,11 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
+[dependencies]
+numpy = "1.21.5"
+argparse = "1.4.0"
+Pillow = "9.0.1"
+
 [project.optional-dependencies]
 dev = ["pytest"]
 
@@ -30,4 +36,4 @@ dev = ["pytest"]
 "Bug Tracker" = "https://github.com/software-students-fall2022/python-package-exercise-project-3-team-8/issues"
 
 [project.scripts]
-asciiarttools = "asciiarttools.__main__:main"
+wisdom = "wisdom.__main__:main"
