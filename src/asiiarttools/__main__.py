@@ -1,6 +1,5 @@
 # Python code to convert an image to ASCII image.
-import argparse
-import asciiArt as art
+import asciiarttools as art
  
 # main() function
 def main():
@@ -21,23 +20,17 @@ def main():
  
     # set output file
     outFile = 'out.txt'
-    if args.outFile:
-        outFile = args.outFile
  
     # set scale default as 0.43 which suits
     # a Courier font
     scale = 0.43
-    if args.scale:
-        scale = float(args.scale)
  
     # set cols
     cols = 80
-    if args.cols:
-        cols = int(args.cols)
  
     print('Generating ASCII art from image...')
     # convert image to ascii txt
-    aimg = art.convertImageToAscii(imgFile, cols, scale, args.moreLevels)
+    aimg = art.convertImageToAscii(imgFile, cols, scale, True)
  
     # open file
     f = open(outFile, 'w')
