@@ -16,7 +16,7 @@ def main():
  
     # parse args
     args = parser.parse_args()
-   
+
     imgFile = args.imgFile
  
     # set output file
