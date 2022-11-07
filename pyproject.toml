@@ -3,12 +3,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyasciiart"
+name = "asiiarttools"
 description = "A package that converts image to ASCII art, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
 version = "0.0.1"
 authors = [
   # add your name and email here
   { name="Jiawei Zhang", email="jiawei.zhang@nyu.edu" },
+  { name="Michael Ma", email="michael.ma@nyu.edu"},
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
