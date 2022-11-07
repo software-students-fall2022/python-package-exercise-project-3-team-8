@@ -4,9 +4,6 @@ ASCII art is a graphic design technique that uses computers for presentation and
 
 ## How this package was created
 
-1. [Install pipenv](https://packaging.python.org/en/latest/tutorials/managing-dependencies/#managing-dependencies), [build](https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives), and [twine](https://packaging.python.org/en/latest/key_projects/#twine) if not already installed.
-2. create directory structure for the package like that below, where `pyasciiart` is replaced with your package's name. This name must be uniquely yours when uploaded to [PyPI](https://pypi.org/). Better to avoid hyphens or underline characters (`-` or `_`) in the package name, as these can create problems when importing. The parent directory name (the repository name) - `python-package-example` in this case - is not relevant to the package name.
-
 ```
 python-package-example/
   |____README.md
@@ -14,18 +11,17 @@ python-package-example/
   |____pyproject.toml
   |____tests
   |____src
-    |____pyasciiart
+    |____asciiarttools
       |______init__.py
       |______main__.py
-      |____asciiArt.py
+      |____asciiarttools.py
 ```
 
-3. Make `__init__.py` an empty file.
-4. Enter the text of a [copyright license of your choosing](https://choosealicense.com/) into `LICENSE`.
-5. Add settings in `pyproject.toml` suitable for a `setuptools`-based build and add metadata fields to this file - see the example in this repository.
-6. Four main functions in `src`/`pyasciiart`/`asciiArt.py` 
-7. Optionally add a `__main__.py` file to the package directory, if you want to be able to run the package as a script from the command line, e.g. `python -m pyasciiart`.
-8. Build the project by running `python -m build` from the same directory where the `pyproject.toml` file is located.
+
+
+1.Four main functions in `src`/`pyasciiart`/`asciiArt.py` 
+2. Optionally add a `__main__.py` file to the package directory, if you want to be able to run the package as a script from the command line, e.g. `python -m pyasciiart`.
+3. Build the project by running `python -m build` from the same directory where the `pyproject.toml` file is located.
 9. Verify that the built `.tar` archive has the files you expect your package to have (including any important non-code files) by running the command: `tar --list -f dist/examplepackagefb1258-0.0.7.tar.gz`, where `examplepackagefb1258-0.0.7` is replaced with your own package name and version.
 10. Create an account on [TestPyPI](https://test.pypi.org/) where one can upload to a test repository instead of the production PyPI repo.
 11. Create a [new API token](https://test.pypi.org/manage/account/#api-tokens) on TestPyPI with the "Scope" set to “Entire account”. Save a copy of the token somewhere safe.

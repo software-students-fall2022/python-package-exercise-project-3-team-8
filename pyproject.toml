@@ -7,7 +7,8 @@ name = "asiiarttools"
 description = "A package that converts image to ASCII art, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
 version = "0.0.1"
 authors = [
-  # add your name and email here
+  { name="Wenni Fan", email="wf630@nyu.edu" },
+  { name="David Adler", email="dga268@nyu.edu" },
   { name="Jiawei Zhang", email="jiawei.zhang@nyu.edu" },
   { name="Michael Ma", email="michael.ma@nyu.edu"},
 ]
