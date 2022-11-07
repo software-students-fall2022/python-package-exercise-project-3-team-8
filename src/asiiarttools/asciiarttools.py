@@ -82,7 +82,7 @@ def getAverageL(image):
     # get average
     return np.average(im.reshape(w*h))
  
-def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True):
+def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True, debug=False):
     """
     Given Image and dims (rows, cols) returns an m*n list of Images
     """
@@ -94,7 +94,8 @@ def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True):
  
     # store dimensions
     W, H = image.size[0], image.size[1]
-    print("input image dims: %d x %d" % (W, H))
+    if debug:
+        print("input image dims: %d x %d" % (W, H))
  
     # compute width of tile
     w = W/cols

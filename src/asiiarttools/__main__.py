@@ -1,43 +1,23 @@
 # Python code to convert an image to ASCII image.
-import argparse
-import asciiArt as art
+import asciiarttools as art
  
 # main() function
 def main():
-    # create parser
-    descStr = "This program converts an image into ASCII art."
-    parser = argparse.ArgumentParser(description=descStr)
-    # add expected arguments
-    parser.add_argument('--file', dest='imgFile', required=True)
-    parser.add_argument('--scale', dest='scale', required=False)
-    parser.add_argument('--out', dest='outFile', required=False)
-    parser.add_argument('--cols', dest='cols', required=False)
-    parser.add_argument('--morelevels',dest='moreLevels',action='store_true')
- 
-    # parse args
-    args = parser.parse_args()
-   
-    imgFile = args.imgFile
+    imgFile = "cat2.jpg"
  
     # set output file
     outFile = 'out.txt'
-    if args.outFile:
-        outFile = args.outFile
  
     # set scale default as 0.43 which suits
     # a Courier font
     scale = 0.43
-    if args.scale:
-        scale = float(args.scale)
  
     # set cols
     cols = 80
-    if args.cols:
-        cols = int(args.cols)
  
     print('Generating ASCII art from image...')
     # convert image to ascii txt
-    aimg = art.convertImageToAscii(imgFile, cols, scale, args.moreLevels)
+    aimg = art.convertImageToAscii(imgFile, cols, scale, True)
  
     # open file
     f = open(outFile, 'w')
