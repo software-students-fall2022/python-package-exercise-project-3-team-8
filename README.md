@@ -24,11 +24,12 @@ python-package-example/
 1. Four main functions in `src`/`pyasciiart`/`asciiArt.py` 
 2. Optionally add a `__main__.py` file to the package directory, if you want to be able to run the package as a script from the command line, e.g. `python -m pyasciiart`.
 3. Build the project by running `python -m build` from the same directory where the `pyproject.toml` file is located.
-9. Verify that the built `.tar` archive has the files you expect your package to have (including any important non-code files) by running the command: `tar --list -f dist/examplepackagefb1258-0.0.7.tar.gz`, where `examplepackagefb1258-0.0.7` is replaced with your own package name and version.
-10. Create an account on [TestPyPI](https://test.pypi.org/) where one can upload to a test repository instead of the production PyPI repo.
-11. Create a [new API token](https://test.pypi.org/manage/account/#api-tokens) on TestPyPI with the "Scope" set to “Entire account”. Save a copy of the token somewhere safe.
-12. [Upload your package](examplepackagefb1258) to the TestPyPI repository using twine, e.g. `twine upload -r testpypi dist/*`
-13. twine will output the URL of your package on the PyPI website - load that URL in your web browser to see your packaged published - make sure the `README.md` file looks nice on the web site.
+
+4. Verify that the built `.tar` archive has the files you expect your package to have (including any important non-code files) by running the command: `tar --list -f dist/pyasciiart-0.0.1.tar.gz`, where `pyasciiart-0.0.1` is replaced with your own package name 
+5. Create an account on [TestPyPI](https://test.pypi.org/) where one can upload to a test repository instead of the production PyPI repo.
+6. Create a [new API token](https://test.pypi.org/manage/account/#api-tokens) on TestPyPI with the "Scope" set to “Entire account”. Save a copy of the token somewhere safe.
+7. [Upload your package](examplepackagefb1258) to the TestPyPI repository using twine, e.g. `twine upload -r testpypi dist/*`
+8. twine will output the URL of your package on the PyPI website - load that URL in your web browser to see your packaged published - make sure the `README.md` file looks nice on the web site.
 
 Every time you change the code in your package, you will need to rebuild and reupload it to PyPI. You will need to build from a clean slate and update the version number to achieve this:
 
@@ -48,12 +49,13 @@ Try [installing and using your package](https://packaging.python.org/en/latest/t
 
 1. Create a `pipenv`-managed virtual environment and install the latest version of your package installed: `pipenv install -i https://test.pypi.org/simple/ examplepackagefb1258==0.0.7`. (Note that if you've previously created a `pipenv` virtual environment in the same directory, you may have to delete the old one first. Find out where it is located with the `pipenv --venv` command.)
 1. Activate the virtual environment: `pipenv shell`.
-1. Create a Python program file that imports your package and uses it, e.g. `from examplepackagefb1258 import wisdom` and then `print(wisdom.get())` (replace `wisdom` and `get()` with any module name and function that exists in your package) .
-1. Run the program: `python3 my_program_filename.py`.
-1. Exit the virtual environment: `exit`.
+2. Create a Python program file that imports your package and uses it, e.g. `from pyasciiart import asciiarttools` and then `print(asciiarttools.convertImageToAsciiImage('cat1.jpg', 'output.png')
+())` 
+3. Run the program: `python3 __main__.py`.
+4. Exit the virtual environment: `exit`.
 
 Try running the package directly:
 
 1. Create and activate up the `pipenv` virtual environment as before.
-2. Run the package directly from the command line: `python3 -m examplepackagefb1258`. This should run the code in the `__main__.py` file.
+2. Run the package directly from the command line: `python3 -m pyasciiart`. This should run the code in the `__main__.py` file.
 3. Exit the virtual environment.
