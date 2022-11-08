@@ -196,10 +196,10 @@ def adjustASCIIContrast(art, value, moreLevels=True):
                 #make index approach middle of gscale list
                 if (gscale.index(art[i])<=len(gscale)/2):
 
-                    newVal=min(round(len(gscale)/2)-1, gscale.index(art[i]) + adjustedVal)
+                    newVal=min(round(len(gscale)/2), gscale.index(art[i]) + adjustedVal)
                
                 else:
-                    newVal = max(round(len(gscale)/2), gscale.index(art[i]) - adjustedVal)
+                    newVal = max(round(len(gscale)/2)+1, gscale.index(art[i]) - adjustedVal)
 
                 output[i] = gscale[newVal]
             #sharper
