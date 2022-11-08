@@ -1,3 +1,5 @@
+![Python build & test](https://github.com/software-students-fall2022/python-package-exercise-project-3-team-8/actions/workflows/python-package.yml/badge.svg)
+
 # Convert Image to ASCII
 ASCII art is a graphic design technique that uses computers for presentation and consists of pictures pieced together from the 95 printable (from a total of 128) characters defined by the ASCII Standard from 1963 and ASCII compliant character sets with proprietary extended characters (beyond the 128 characters of standard 7-bit ASCII). The term is also loosely used to refer to text-based visual art in general. ASCII art can be created with any text editor and is often used with free-form languages. Most examples of ASCII art require a fixed-width font (non-proportional fonts, as on a traditional typewriter) such as Courier for presentation. Among the oldest known examples of ASCII art are the creations by computer-art pioneer Kenneth Knowlton from around 1966, who was working for Bell Labs at the time. “Studies in Perception I” by Ken Knowlton and Leon Harmon from 1966 shows some examples of their early ASCII art. ASCII art was invented, in large part, because early printers often lacked graphics ability and thus characters were used in place of graphic marks. Also, to mark divisions between different print jobs from different users, bulk printers often used ASCII art to print large banners, making the division easier to spot so that the results could be more easily separated by a computer operator or clerk. ASCII art was also used in an early e-mail when images could not be embedded. You can find out more about them. [Source : Wiki](https://en.wikipedia.org/wiki/ASCII_art)
 
@@ -19,7 +21,7 @@ python-package-example/
 
 
 
-1.Four main functions in `src`/`pyasciiart`/`asciiArt.py` 
+1. Four main functions in `src`/`pyasciiart`/`asciiArt.py` 
 2. Optionally add a `__main__.py` file to the package directory, if you want to be able to run the package as a script from the command line, e.g. `python -m pyasciiart`.
 3. Build the project by running `python -m build` from the same directory where the `pyproject.toml` file is located.
 9. Verify that the built `.tar` archive has the files you expect your package to have (including any important non-code files) by running the command: `tar --list -f dist/examplepackagefb1258-0.0.7.tar.gz`, where `examplepackagefb1258-0.0.7` is replaced with your own package name and version.

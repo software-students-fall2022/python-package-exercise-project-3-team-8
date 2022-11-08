@@ -1,19 +1,18 @@
 import pytest
 from PIL import Image
-from asciiarttools import asciiarttools
-gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+#from asciiarttools import asciiarttools
+import sys
+sys.path.insert(1, '../src/asciiarttools')
+import asciiarttools
+gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 gscale2 = '@%#*+=-:. '
-#This test function is not working
+allowed_chars = '\n'
+
 def testTextAsciiOutputQuality(fileName,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
-    newtext=asciiarttools.convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True, debug=False)
-    check=True
+    newtext=asciiarttools.convertImageToAscii(fileName, moreLevels)
     for i in range(len(newtext)):
-        if newtext[i] in gscale:
-            continue
-        else:
-            check=False
-    assert check==True, "The generated text image contains invalid character"
+        assert newtext[i] not in gscale and newtext[i] not in allowed_chars, f"The generated text image contains invalid character '{newtext[i]}'"
         
 def testColorAsciiOutputQuality(inputImage):
     asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
@@ -45,24 +44,14 @@ def testIncreaseBrightness(art,value,moreLevels=True):
     newtext=asciiarttools.adjustASCIIBrightness(art, value,moreLevels=True)
     check=True
     for i in range(len(newtext)):
-        if gscale.index(art[i])<=gscale.index(newtext[i]):
-            continue
-        else:
-            check=False
-            break
-    assert check==True, "The character shift is in the wrong direction"
+        assert gscale.index(art[i])<=gscale.index(newtext[i]), f"The character '{art[i]}' was shifted in the wrong direction"
 
 def testDecreaseBrightness(art,value,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newtext=asciiarttools.adjustASCIIBrightness(art, value,moreLevels=True)
     check=True
     for i in range(len(newtext)):
-        if gscale.index(art[i])>=gscale.index(newtext[i]):
-            continue
-        else:
-            check=False
-            break
-    assert check==True, "The character shift is in the wrong direction"
+        assert gscale.index(art[i])>=gscale.index(newtext[i]), f"The character '{art[i]}' was shifted in the wrong direction"
 
 def testAdjustContrastShape(art,value,moreLevels=True):
     newtext=asciiarttools.adjustASCIIContrast(art, value,moreLevels=True)
