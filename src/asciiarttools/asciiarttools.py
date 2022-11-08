@@ -10,7 +10,9 @@ gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'
 gscale2 = '@%#*+=-:. '
 
 def convertImageToAsciiImage(inputImage, outFile='output.png'):
-
+    '''
+    Given image filename, generate a PNG of colored text art for that image
+    '''
     #"Standard" list of ASCII sorted by grayscale (dark to light)
     global gscale1
     character=gscale1
@@ -105,9 +107,10 @@ def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True, debug=Fa
  
     # compute number of rows
     rows = int(H/h)
-     
-    print("cols: %d, rows: %d" % (cols, rows))
-    print("tile dims: %d x %d" % (w, h))
+
+    if debug:
+        print("cols: %d, rows: %d" % (cols, rows))
+        print("tile dims: %d x %d" % (w, h))
  
     # check if image size is too small
     if cols > W or rows > H:
