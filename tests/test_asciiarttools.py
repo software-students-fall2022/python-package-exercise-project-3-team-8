@@ -3,17 +3,17 @@ from PIL import Image
 #from asciiarttools import asciiarttools
 import sys
 sys.path.insert(1, '../src/asciiarttools')
-import asciiarttools
+from src.asciiarttools import asciiarttools
 gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 gscale2 = '@%#*+=-:. '
 allowed_chars = '\n'
-def test_TextAsciiOutputLength(inputImage="cat2.jpg"):
+def test_TextAsciiOutputLength(inputImage="tests/cat2.jpg"):
     newfile=asciiarttools.convertImageToAscii(inputImage)
     f=open(newfile,'r')
     f=list(f)
     assert len(f)>0, "The output file empty"
 
-def test_TextAsciiOutputQuality(fileName="cat2.jpg",moreLevels=True):
+def test_TextAsciiOutputQuality(fileName="tests/cat2.jpg",moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newfile=asciiarttools.convertImageToAscii(fileName, moreLevels)
     newtext=open(newfile,'r')
@@ -21,15 +21,15 @@ def test_TextAsciiOutputQuality(fileName="cat2.jpg",moreLevels=True):
     for i in range(len(newtext)):
         assert newtext[i] not in gscale and newtext[i] not in allowed_chars, f"The generated text image contains invalid character '{newtext[i]}'"
 
-def test_TextAsciiOutputType(inputImage="cat2.jpg"):
+def test_TextAsciiOutputType(inputImage="tests/cat2.jpg"):
     file=asciiarttools.convertImageToAscii(inputImage)
     assert file.endswith('.txt'), "The output file format is wrong"
 
-def test_ColorAsciiOutputType(inputImage="cat2.jpg"):
+def test_ColorAsciiOutputType(inputImage="tests/cat2.jpg"):
     image=asciiarttools.convertImageToAsciiImage(inputImage)
     assert image.endswith('.png'), "The output file format is wrong"
         
-def test_ColorAsciiOutputQuality(inputImage="cat2.jpg",outFile='output.png'):
+def test_ColorAsciiOutputQuality(inputImage="tests/cat2.jpg",outFile='output.png'):
     image=asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
     check=True
     try:
@@ -42,7 +42,7 @@ def test_ColorAsciiOutputQuality(inputImage="cat2.jpg",outFile='output.png'):
         check=False
     assert check==True, "The generated image is broken"
 
-def test_ColorAsciiOutputSize(inputImage="cat2.jpg"):
+def test_ColorAsciiOutputSize(inputImage="tests/cat2.jpg"):
     im1 = Image.open(inputImage)
     width1, height1=im1.size
     asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
