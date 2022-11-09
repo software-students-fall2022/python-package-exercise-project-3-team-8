@@ -6,15 +6,18 @@ Our project is to convert input image from user and generate the corresponding A
 ## Installation
 1. Create a `pipenv`-managed virtual environment and install the latest version of the package installed: 
 ```
-pip install asciiarttools
+pipenv install -i https://pypi.org/simple/ asciiarttools
 ```
-
-2. Create a Python program file that imports the package and uses it(make sure you have a photo like 'cat1.jpg' pr something in the same directory), e.g. 
+2. Activate the virtual environment: 
 ```
+pipenv shell
+```
+3. Create a Python program file that imports the package and uses it, e.g. 
+```python
 from asciiarttools import asciiarttools
 ```
 and then call the functions, for example:
-```
+```python
 asciiarttools.convertImageToAsciiImage('cat1.jpg', 'output.png')
 ```
 
@@ -22,26 +25,26 @@ asciiarttools.convertImageToAsciiImage('cat1.jpg', 'output.png')
 ## Functions
 
 1. Generate a plain ASCII image from input image
-```
+```python
 convertImageToAscii(fileName, cols, scale, moreLevels, debug,outFile)
 ```
 
 Call convertImageToAscii function and pass the input file name, columns number, scale, level of grayscale, debug mode, and output file name. The default value is cols=80, scale=0.43, moreLevels=True,debug=False,outFile="out.txt".
 
 2. Generate a colored ASCII image from input image
-```
+```python
 convertImageToAsciiImage(inputImage, outFile='output.png')
 ```
 Call convertImageToAsciiImage function and pass the input file and output file. The default is outFile='output.png'
 
 3. Adjust the brightness of a generated ASCII text image
-```
+```python
 adjustASCIIBrightness(art, value, moreLevels=True)
 ```
 Call adjustASCIIBrightness function and pass the input ASCII art file, magnitude in adjusting brightness, and level of grayscale. The default is moreLevels=True. The range for value is [-1,1], where value approaches 1 means increases the brightness, and value approaches -1 means decreases the brightness.
 
 4. Adjust the contrast of a generated ASCII text image
-```
+```python
 adjustASCIIContrast(art, value, moreLevels=True)
 ```
 Call adjustASCIIContrast function and pass the input ASCII art file, magnitude in adjusting contrast, and level of grayscale. The default is moreLevels=True.The range for value is [-1,1], where value approaches 1 means sharpen the contrast, and value approaches -1 means soften the contrast.<br />
