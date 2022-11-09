@@ -6,13 +6,10 @@ Our project is to convert input image from user and generate the corresponding A
 ## Installation
 1. Create a `pipenv`-managed virtual environment and install the latest version of the package installed: 
 ```
-pipenv install -i https://test.pypi.org/simple/ asciiarttools
+pip install asciiarttools
 ```
-2. Activate the virtual environment: 
-```
-pipenv shell
-```
-3. Create a Python program file that imports the package and uses it, e.g. 
+
+2. Create a Python program file that imports the package and uses it(make sure you have a photo like 'cat1.jpg' pr something in the same directory), e.g. 
 ```
 from asciiarttools import asciiarttools
 ```
