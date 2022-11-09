@@ -69,7 +69,8 @@ def convertImageToAsciiImage(inputImage, outFile='output.png'):
         #output.write("\n")
 
     #get .png output image   
-    outputImage.save(outFile)   
+    outputImage.save(outFile)
+    return outFile   
  
 def getAverageL(image):
     """
@@ -84,7 +85,7 @@ def getAverageL(image):
     # get average
     return np.average(im.reshape(w*h))
  
-def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True, debug=False):
+def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True, debug=False,outFile="out.txt"):
     """
     Given Image and dims (rows, cols) returns an m*n list of Images
     """
@@ -155,9 +156,17 @@ def convertImageToAscii(fileName, cols=80, scale=0.43, moreLevels=True, debug=Fa
  
             # append ascii char to string
             aimg[j] += gsval
-     
+
+    f = open(outFile, 'w')
+ 
+    # write to file
+    for row in aimg:
+        f.write(row + '\n')
+ 
+    # cleanup
+    f.close()
     # return txt image
-    return aimg
+    return outFile
 
 def adjustASCIIBrightness(art, value, moreLevels=True):
     """
@@ -219,5 +228,6 @@ def adjustASCIIContrast(art, value, moreLevels=True):
                 output[i] = gscale[newVal]
 
     return ''.join(output)
+
 
     
