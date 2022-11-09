@@ -12,7 +12,7 @@ name = "testpypi"
 numpy = "*"
 pillow = "*"
 pytest = "*"
-asciiarttools = {version = "==0.0.1", index = "testpypi"}
+asciiarttools = {version = "==0.0.3", index = "pypi"}
 
 [dev-packages]
 
