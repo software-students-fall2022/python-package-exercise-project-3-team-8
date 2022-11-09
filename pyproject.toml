@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asciiarttools"
+description = "A package that converts image to ASCII art, developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
+version = "0.0.3"
+authors = [
+  { name="Wenni Fan", email="wf630@nyu.edu" },
+  { name="David Adler", email="dga268@nyu.edu" },
+  { name="Jiawei Zhang", email="jiawei.zhang@nyu.edu" },
+  { name="Michael Ma", email="michael.ma@nyu.edu"},
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = ["python", "package", "build", "tutorial"]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'numpy >= 1.21.5',
+  'Pillow >= 9.0.1'
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.urls]
+"Homepage" = "https://github.com/software-students-fall2022/python-package-exercise-project-3-team-8"
+"Repository" = "https://github.com/software-students-fall2022/python-package-exercise-project-3-team-8.git"
+"Bug Tracker" = "https://github.com/software-students-fall2022/python-package-exercise-project-3-team-8/issues"
+
+[project.scripts]
+asciiarttools = "asciiarttools.__main__:main"
