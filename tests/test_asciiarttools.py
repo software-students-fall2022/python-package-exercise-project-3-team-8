@@ -1,8 +1,5 @@
 import pytest
 from PIL import Image
-#from asciiarttools import asciiarttools
-import sys
-sys.path.insert(1, '../src/asciiarttools')
 from src.asciiarttools import asciiarttools
 gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 gscale2 = '@%#*+=-:. '
@@ -108,4 +105,3 @@ def test_SoftenContrast(art="out.txt",value=-0.5,moreLevels=True):
                 check=False
                 break
     assert check==True, "The character shift is in the wrong direction"
-
