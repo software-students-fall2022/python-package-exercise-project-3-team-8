@@ -7,13 +7,13 @@ import asciiarttools
 gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 gscale2 = '@%#*+=-:. '
 allowed_chars = '\n'
-def testTextAsciiOutputLength(inputImage):
+def test_TextAsciiOutputLength(inputImage="cat2.jpg"):
     newfile=asciiarttools.convertImageToAscii(inputImage)
     f=open(newfile,'r')
     f=list(f)
     assert len(f)>0, "The output file empty"
 
-def testTextAsciiOutputQuality(fileName,moreLevels=True):
+def test_TextAsciiOutputQuality(fileName="cat2.jpg",moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newfile=asciiarttools.convertImageToAscii(fileName, moreLevels)
     newtext=open(newfile,'r')
@@ -21,15 +21,15 @@ def testTextAsciiOutputQuality(fileName,moreLevels=True):
     for i in range(len(newtext)):
         assert newtext[i] not in gscale and newtext[i] not in allowed_chars, f"The generated text image contains invalid character '{newtext[i]}'"
 
-def testTextAsciiOutputType(inputImage):
+def test_TextAsciiOutputType(inputImage="cat2.jpg"):
     file=asciiarttools.convertImageToAscii(inputImage)
     assert file.endswith('.txt'), "The output file format is wrong"
 
-def testColorAsciiOutputType(inputImage):
+def test_ColorAsciiOutputType(inputImage="cat2.jpg"):
     image=asciiarttools.convertImageToAsciiImage(inputImage)
     assert image.endswith('.png'), "The output file format is wrong"
         
-def testColorAsciiOutputQuality(inputImage,outFile='output.png'):
+def test_ColorAsciiOutputQuality(inputImage="cat2.jpg",outFile='output.png'):
     image=asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
     check=True
     try:
@@ -42,37 +42,36 @@ def testColorAsciiOutputQuality(inputImage,outFile='output.png'):
         check=False
     assert check==True, "The generated image is broken"
 
-def testColorAsciiOutputSize(inputImage):
+def test_ColorAsciiOutputSize(inputImage="cat2.jpg"):
     im1 = Image.open(inputImage)
     width1, height1=im1.size
     asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
     im2 = Image.open('output.png')
     width2, height2=im2.size
     assert (width2==10*width1) & (height2==18*height1), "The generated image is in the wrong size"
-
-def testAdjustBrightnessShape(art,value,moreLevels=True):
+def test_AdjustBrightnessShape(art="out.txt",value=0.5,moreLevels=True):
     newtext=asciiarttools.adjustASCIIBrightness(art, value,moreLevels=True)
     assert len(art)==len(newtext), "The new ascii art has the wrong shape after adjusting the brightness"
 
-def testIncreaseBrightness(art,value,moreLevels=True):
+def test_IncreaseBrightness(art="out.txt",value=0.5,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newtext=asciiarttools.adjustASCIIBrightness(art, value,moreLevels=True)
     check=True
     for i in range(len(newtext)):
         assert gscale.index(art[i])<=gscale.index(newtext[i]), f"The character '{art[i]}' was shifted in the wrong direction"
 
-def testDecreaseBrightness(art,value,moreLevels=True):
+def test_DecreaseBrightness(art="out.txt",value=-0.5,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newtext=asciiarttools.adjustASCIIBrightness(art, value,moreLevels=True)
     check=True
     for i in range(len(newtext)):
         assert gscale.index(art[i])>=gscale.index(newtext[i]), f"The character '{art[i]}' was shifted in the wrong direction"
 
-def testAdjustContrastShape(art,value,moreLevels=True):
+def test_AdjustContrastShape(art="out.txt",value=0.5,moreLevels=True):
     newtext=asciiarttools.adjustASCIIContrast(art, value,moreLevels=True)
     assert len(art)==len(newtext), "The new ascii art has the wrong shape after adjusting contrast"
 
-def testSharpenContrast(art,value,moreLevels=True):
+def test_SharpenContrast(art="out.txt",value=0.5,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newtext=asciiarttools.adjustASCIIContrast(art, value,moreLevels=True)
     check=True
@@ -91,7 +90,7 @@ def testSharpenContrast(art,value,moreLevels=True):
                 break
     assert check==True, "The character shift is in the wrong direction"
 
-def testSoftenContrast(art,value,moreLevels=True):
+def test_SoftenContrast(art="out.txt",value=-0.5,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
     newtext=asciiarttools.adjustASCIIContrast(art, value,moreLevels=True)
     check=True
@@ -110,19 +109,3 @@ def testSoftenContrast(art,value,moreLevels=True):
                 break
     assert check==True, "The character shift is in the wrong direction"
 
-
-testIncreaseBrightness("out.txt",0.5,moreLevels=True)
-testDecreaseBrightness("out.txt",-0.5,moreLevels=True)
-testAdjustBrightnessShape("out.txt",0.5,moreLevels=True)
-
-testSharpenContrast("out.txt",0.5,moreLevels=True)
-testSoftenContrast("out.txt",-0.5,moreLevels=True)
-testAdjustContrastShape("out.txt",0.5,moreLevels=True)
-
-testTextAsciiOutputLength("cat2.jpg")
-testTextAsciiOutputQuality("cat2.jpg")
-testTextAsciiOutputType("cat2.jpg")
-
-testColorAsciiOutputType("cat2.jpg")
-testColorAsciiOutputQuality("cat2.jpg")
-testColorAsciiOutputSize("cat2.jpg")
