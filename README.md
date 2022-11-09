@@ -75,7 +75,7 @@ python -m pytest
 ## Link to Example Python Program
 [Example Program](https://github.com/software-students-fall2022/python-package-exercise-project-3-team-8/blob/main/src/asciiarttools/__main__.py)
 ## Link to package's page on the PyPI website
-https://test.pypi.org/project/asciiarttools/
+https://pypi.org/project/asciiarttools/0.0.3/
 
 
 
