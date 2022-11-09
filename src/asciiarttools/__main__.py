@@ -1,34 +1,36 @@
 # Python code to convert an image to ASCII image.
 import asciiarttools as art
+import sys
  
 # main() function
 def main():
-    imgFile = "cat2.jpg"
- 
+    if len(sys.argv) < 2:
+        print(f"Usage: py {sys.argv[0]} filename\n")
+        sys.exit()
+    imgFile = sys.argv[1]
+
+    # -------- convertImageToAscii --------
     # set output file
     outFile = 'out.txt'
- 
+
     # set scale default as 0.43 which suits
-    # a Courier font
+    # a Courier font (default value)
     scale = 0.43
- 
-    # set cols
+
+    # set cols (80 is a default value)
     cols = 80
- 
+
     print('Generating ASCII art from image...')
-    # convert image to ascii txt
     art.convertImageToAscii(imgFile, cols, scale, True)
- 
     print("ASCII art written to %s" % outFile)
 
-    # test ASCII color image
+    # -------- convertImageToAsciiImage --------
     print('Generating ASCII art color image from image...')
-    art.convertImageToAsciiImage('cat1.jpg', 'output.png')
+    art.convertImageToAsciiImage(imgFile, 'output.png')
     print('ASCII image written to output.png')
 
-    # test adjusting brightness
+    # -------- adjustASCIIBrightness --------
     print('Adjusting brightness of ASCII image')
-
     f = open(outFile, 'r')
     baseImg = f.read()
     f.close()
@@ -43,6 +45,7 @@ def main():
 
     print('ASCII image output written to brightened.txt and darkened.txt')
     
+    # -------- adjustASCIIContrast --------
     f = open("out.txt", 'r')
     baseImg = f.read()
     f.close()
