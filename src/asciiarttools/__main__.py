@@ -17,17 +17,8 @@ def main():
  
     print('Generating ASCII art from image...')
     # convert image to ascii txt
-    aimg = art.convertImageToAscii(imgFile, cols, scale, True)
+    art.convertImageToAscii(imgFile, cols, scale, True)
  
-    # open file
-    f = open(outFile, 'w')
- 
-    # write to file
-    for row in aimg:
-        f.write(row + '\n')
- 
-    # cleanup
-    f.close()
     print("ASCII art written to %s" % outFile)
 
     # test ASCII color image

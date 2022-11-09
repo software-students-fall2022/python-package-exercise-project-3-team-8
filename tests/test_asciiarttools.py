@@ -7,18 +7,33 @@ import asciiarttools
 gscale1 = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 gscale2 = '@%#*+=-:. '
 allowed_chars = '\n'
+def testTextAsciiOutputLength(inputImage):
+    newfile=asciiarttools.convertImageToAscii(inputImage)
+    f=open(newfile,'r')
+    f=list(f)
+    assert len(f)>0, "The output file empty"
 
 def testTextAsciiOutputQuality(fileName,moreLevels=True):
     gscale = gscale1 if moreLevels else gscale2
-    newtext=asciiarttools.convertImageToAscii(fileName, moreLevels)
+    newfile=asciiarttools.convertImageToAscii(fileName, moreLevels)
+    newtext=open(newfile,'r')
+    newtext=list(newtext)
     for i in range(len(newtext)):
         assert newtext[i] not in gscale and newtext[i] not in allowed_chars, f"The generated text image contains invalid character '{newtext[i]}'"
+
+def testTextAsciiOutputType(inputImage):
+    file=asciiarttools.convertImageToAscii(inputImage)
+    assert file.endswith('.txt'), "The output file format is wrong"
+
+def testColorAsciiOutputType(inputImage):
+    image=asciiarttools.convertImageToAsciiImage(inputImage)
+    assert image.endswith('.png'), "The output file format is wrong"
         
-def testColorAsciiOutputQuality(inputImage):
-    asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
+def testColorAsciiOutputQuality(inputImage,outFile='output.png'):
+    image=asciiarttools.convertImageToAsciiImage(inputImage, outFile='output.png')
     check=True
     try:
-        im=Image.open('output.png')
+        im=Image.open(outFile)
         try:
             im.verify()
         except:
@@ -95,12 +110,19 @@ def testSoftenContrast(art,value,moreLevels=True):
                 break
     assert check==True, "The character shift is in the wrong direction"
 
+
 testIncreaseBrightness("out.txt",0.5,moreLevels=True)
 testDecreaseBrightness("out.txt",-0.5,moreLevels=True)
 testAdjustBrightnessShape("out.txt",0.5,moreLevels=True)
+
 testSharpenContrast("out.txt",0.5,moreLevels=True)
 testSoftenContrast("out.txt",-0.5,moreLevels=True)
 testAdjustContrastShape("out.txt",0.5,moreLevels=True)
+
+testTextAsciiOutputLength("cat2.jpg")
+testTextAsciiOutputQuality("cat2.jpg")
+testTextAsciiOutputType("cat2.jpg")
+
+testColorAsciiOutputType("cat2.jpg")
 testColorAsciiOutputQuality("cat2.jpg")
 testColorAsciiOutputSize("cat2.jpg")
-testTextAsciiOutputQuality("cat2.jpg")
